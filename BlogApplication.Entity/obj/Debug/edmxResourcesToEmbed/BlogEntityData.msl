@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BlogModelStoreContainer" CdmEntityContainer="BlogEntities">
+    <EntitySetMapping Name="CategoryList">
+      <EntityTypeMapping TypeName="BlogModel.CategoryList">
+        <MappingFragment StoreEntitySet="CategoryList">
+          <ScalarProperty Name="TopCategory" ColumnName="TopCategory" />
+          <ScalarProperty Name="CategoryLink" ColumnName="CategoryLink" />
+          <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HeaderZone">
+      <EntityTypeMapping TypeName="BlogModel.HeaderZone">
+        <MappingFragment StoreEntitySet="HeaderZone">
+          <ScalarProperty Name="InstagramAddress" ColumnName="InstagramAddress" />
+          <ScalarProperty Name="GPlusAddress" ColumnName="GPlusAddress" />
+          <ScalarProperty Name="TwitterAddress" ColumnName="TwitterAddress" />
+          <ScalarProperty Name="FacebookAddress" ColumnName="FacebookAddress" />
+          <ScalarProperty Name="FooterText" ColumnName="FooterText" />
+          <ScalarProperty Name="Slogan" ColumnName="Slogan" />
+          <ScalarProperty Name="Logo" ColumnName="Logo" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MenuZone">
+      <EntityTypeMapping TypeName="BlogModel.MenuZone">
+        <MappingFragment StoreEntitySet="MenuZone">
+          <ScalarProperty Name="RecordDate" ColumnName="RecordDate" />
+          <ScalarProperty Name="TopMenu" ColumnName="TopMenu" />
+          <ScalarProperty Name="MenuLink" ColumnName="MenuLink" />
+          <ScalarProperty Name="MenuName" ColumnName="MenuName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PostCommentList">
+      <EntityTypeMapping TypeName="BlogModel.PostCommentList">
+        <MappingFragment StoreEntitySet="PostCommentList">
+          <ScalarProperty Name="RecordDate" ColumnName="RecordDate" />
+          <ScalarProperty Name="PostID" ColumnName="PostID" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PostList">
+      <EntityTypeMapping TypeName="BlogModel.PostList">
+        <MappingFragment StoreEntitySet="PostList">
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+          <ScalarProperty Name="PostLink" ColumnName="PostLink" />
+          <ScalarProperty Name="PostBody" ColumnName="PostBody" />
+          <ScalarProperty Name="PostDate" ColumnName="PostDate" />
+          <ScalarProperty Name="PostHeader" ColumnName="PostHeader" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PostTagList">
+      <EntityTypeMapping TypeName="BlogModel.PostTagList">
+        <MappingFragment StoreEntitySet="PostTagList">
+          <ScalarProperty Name="PostId" ColumnName="PostId" />
+          <ScalarProperty Name="TagId" ColumnName="TagId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TagList">
+      <EntityTypeMapping TypeName="BlogModel.TagList">
+        <MappingFragment StoreEntitySet="TagList">
+          <ScalarProperty Name="TagName" ColumnName="TagName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserList">
+      <EntityTypeMapping TypeName="BlogModel.UserList">
+        <MappingFragment StoreEntitySet="UserList">
+          <ScalarProperty Name="Sifre" ColumnName="Sifre" />
+          <ScalarProperty Name="KullaniciAdi" ColumnName="KullaniciAdi" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

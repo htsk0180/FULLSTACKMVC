@@ -1,0 +1,15 @@
+﻿@using BlogApplication.Entity
+@model List<PostList>
+@{
+    Layout = "~/Views/Shared/_BlogLayout.cshtml";
+}
+
+@foreach (var item in Model)
+{
+    <div class="panel panel-default">
+        <div class="panel-heading"><a href="@($"/Makale/{item.PostLink}")">@item.PostHeader</a></div>
+        <div class="panel-body">
+            @Html.Raw(item.PostBody)
+        </div>
+    </div>
+}

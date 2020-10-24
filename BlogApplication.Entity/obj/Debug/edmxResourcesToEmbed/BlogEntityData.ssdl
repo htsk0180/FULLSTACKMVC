@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BlogModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CategoryList">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CategoryName" Type="nvarchar" MaxLength="500" />
+    <Property Name="CategoryLink" Type="nvarchar" MaxLength="1000" />
+    <Property Name="TopCategory" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="HeaderZone">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Logo" Type="nvarchar" MaxLength="1000" />
+    <Property Name="Slogan" Type="nvarchar(max)" />
+    <Property Name="FooterText" Type="nvarchar(max)" />
+    <Property Name="FacebookAddress" Type="nvarchar(max)" />
+    <Property Name="TwitterAddress" Type="nvarchar(max)" />
+    <Property Name="GPlusAddress" Type="nvarchar(max)" />
+    <Property Name="InstagramAddress" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="MenuZone">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MenuName" Type="nvarchar" MaxLength="500" />
+    <Property Name="MenuLink" Type="nvarchar" MaxLength="1000" />
+    <Property Name="TopMenu" Type="bit" Nullable="false" />
+    <Property Name="RecordDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PostCommentList">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="500" />
+    <Property Name="Surname" Type="nvarchar" MaxLength="500" />
+    <Property Name="Email" Type="nvarchar" MaxLength="500" />
+    <Property Name="Comment" Type="nvarchar" MaxLength="500" />
+    <Property Name="PostID" Type="int" Nullable="false" />
+    <Property Name="RecordDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PostList">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PostHeader" Type="nvarchar" MaxLength="1500" />
+    <Property Name="PostDate" Type="datetime" Nullable="false" />
+    <Property Name="PostBody" Type="nvarchar(max)" />
+    <Property Name="PostLink" Type="nvarchar(max)" />
+    <Property Name="CategoryId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PostTagList">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TagId" Type="int" Nullable="false" />
+    <Property Name="PostId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TagList">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TagName" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="UserList">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="KullaniciAdi" Type="nvarchar" MaxLength="500" />
+    <Property Name="Sifre" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <Association Name="FK_PostCommentList_PostList">
+    <End Role="PostList" Type="Self.PostList" Multiplicity="1" />
+    <End Role="PostCommentList" Type="Self.PostCommentList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PostList">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PostCommentList">
+        <PropertyRef Name="PostID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PostList_CategoryList">
+    <End Role="CategoryList" Type="Self.CategoryList" Multiplicity="1" />
+    <End Role="PostList" Type="Self.PostList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CategoryList">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PostList">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PostTagList_PostList">
+    <End Role="PostList" Type="Self.PostList" Multiplicity="1" />
+    <End Role="PostTagList" Type="Self.PostTagList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PostList">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PostTagList">
+        <PropertyRef Name="PostId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PostTagList_TagList">
+    <End Role="TagList" Type="Self.TagList" Multiplicity="1" />
+    <End Role="PostTagList" Type="Self.PostTagList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TagList">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PostTagList">
+        <PropertyRef Name="TagId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BlogModelStoreContainer">
+    <EntitySet Name="CategoryList" EntityType="Self.CategoryList" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HeaderZone" EntityType="Self.HeaderZone" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MenuZone" EntityType="Self.MenuZone" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PostCommentList" EntityType="Self.PostCommentList" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PostList" EntityType="Self.PostList" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PostTagList" EntityType="Self.PostTagList" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TagList" EntityType="Self.TagList" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserList" EntityType="Self.UserList" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_PostCommentList_PostList" Association="Self.FK_PostCommentList_PostList">
+      <End Role="PostList" EntitySet="PostList" />
+      <End Role="PostCommentList" EntitySet="PostCommentList" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PostList_CategoryList" Association="Self.FK_PostList_CategoryList">
+      <End Role="CategoryList" EntitySet="CategoryList" />
+      <End Role="PostList" EntitySet="PostList" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PostTagList_PostList" Association="Self.FK_PostTagList_PostList">
+      <End Role="PostList" EntitySet="PostList" />
+      <End Role="PostTagList" EntitySet="PostTagList" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PostTagList_TagList" Association="Self.FK_PostTagList_TagList">
+      <End Role="TagList" EntitySet="TagList" />
+      <End Role="PostTagList" EntitySet="PostTagList" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

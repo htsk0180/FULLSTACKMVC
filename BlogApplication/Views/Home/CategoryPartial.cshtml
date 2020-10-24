@@ -1,0 +1,14 @@
+﻿@using BlogApplication.Entity
+@model List<CategoryList>
+
+<div class="panel panel-info">
+    <div class="panel-heading">Kategoriler</div>
+  <table class="table table-hover">
+      @foreach (var item in Model)
+      {
+          <tr>
+              <td><a href="@($"/Kategori/{item.CategoryLink}")">@item.CategoryName</a></td>
+          </tr>
+      }
+  </table>
+</div>

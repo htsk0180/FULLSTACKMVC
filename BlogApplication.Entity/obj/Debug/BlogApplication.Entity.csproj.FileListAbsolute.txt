@@ -1,0 +1,10 @@
+C:\Users\erkanguzzelkucuk\Documents\Visual Studio 2015\Projects\BlogApplication\BlogApplication.Entity\bin\Debug\BlogApplication.Entity.dll.config
+C:\Users\erkanguzzelkucuk\Documents\Visual Studio 2015\Projects\BlogApplication\BlogApplication.Entity\bin\Debug\BlogApplication.Entity.dll
+C:\Users\erkanguzzelkucuk\Documents\Visual Studio 2015\Projects\BlogApplication\BlogApplication.Entity\bin\Debug\BlogApplication.Entity.pdb
+C:\Users\erkanguzzelkucuk\Documents\Visual Studio 2015\Projects\BlogApplication\BlogApplication.Entity\bin\Debug\EntityFramework.dll
+C:\Users\erkanguzzelkucuk\Documents\Visual Studio 2015\Projects\BlogApplication\BlogApplication.Entity\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\erkanguzzelkucuk\Documents\Visual Studio 2015\Projects\BlogApplication\BlogApplication.Entity\bin\Debug\EntityFramework.xml
+C:\Users\erkanguzzelkucuk\Documents\Visual Studio 2015\Projects\BlogApplication\BlogApplication.Entity\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\erkanguzzelkucuk\Documents\Visual Studio 2015\Projects\BlogApplication\BlogApplication.Entity\obj\Debug\BlogApplication.Entity.csprojResolveAssemblyReference.cache
+C:\Users\erkanguzzelkucuk\Documents\Visual Studio 2015\Projects\BlogApplication\BlogApplication.Entity\obj\Debug\BlogApplication.Entity.dll
+C:\Users\erkanguzzelkucuk\Documents\Visual Studio 2015\Projects\BlogApplication\BlogApplication.Entity\obj\Debug\BlogApplication.Entity.pdb

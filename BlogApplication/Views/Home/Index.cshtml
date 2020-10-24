@@ -1,0 +1,15 @@
+﻿@using BlogApplication.Entity
+@using BlogApplication.Helper
+@{
+    Layout = "~/Views/Shared/_BlogLayout.cshtml";
+}
+
+@foreach (var item in (List<PostList>)ViewBag.Articles)
+{
+    <div class="panel panel-default">
+        <div class="panel-heading"><a href="@($"/Makale/{item.PostLink}")">@item.PostHeader</a></div>
+        <div class="panel-body">
+           @Html.Raw(item.PostBody)
+        </div>
+    </div>
+}

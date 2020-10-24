@@ -1,0 +1,13 @@
+﻿@using BlogApplication.Entity
+@model PostList
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_BlogLayout.cshtml";
+}
+
+<div class="panel panel-primary">
+    <div class="panel-heading">@Model.PostHeader<br /><small>Kategori : <strong>@Model.CategoryList.CategoryName</strong></small></div>
+    <div class="panel-body">
+       @Html.Raw(Model.PostBody)
+    </div>
+</div>

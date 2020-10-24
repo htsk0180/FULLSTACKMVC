@@ -1,0 +1,7 @@
+﻿@using BlogApplication.Entity
+@{
+    Layout = "~/Views/Shared/_LayoutAdminPage.cshtml";
+    var User = (UserList)Session["Giris"] ?? null;
+}
+
+@User.KullaniciAdi Hoşgeldiniz :)

@@ -1,0 +1,439 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BlogModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CategoryList">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryName" Type="nvarchar" MaxLength="500" />
+          <Property Name="CategoryLink" Type="nvarchar" MaxLength="1000" />
+          <Property Name="TopCategory" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HeaderZone">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Logo" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Slogan" Type="nvarchar(max)" />
+          <Property Name="FooterText" Type="nvarchar(max)" />
+          <Property Name="FacebookAddress" Type="nvarchar(max)" />
+          <Property Name="TwitterAddress" Type="nvarchar(max)" />
+          <Property Name="GPlusAddress" Type="nvarchar(max)" />
+          <Property Name="InstagramAddress" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="MenuZone">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MenuName" Type="nvarchar" MaxLength="500" />
+          <Property Name="MenuLink" Type="nvarchar" MaxLength="1000" />
+          <Property Name="TopMenu" Type="bit" Nullable="false" />
+          <Property Name="RecordDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PostCommentList">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="500" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="500" />
+          <Property Name="Email" Type="nvarchar" MaxLength="500" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="500" />
+          <Property Name="PostID" Type="int" Nullable="false" />
+          <Property Name="RecordDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PostList">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PostHeader" Type="nvarchar" MaxLength="1500" />
+          <Property Name="PostDate" Type="datetime" Nullable="false" />
+          <Property Name="PostBody" Type="nvarchar(max)" />
+          <Property Name="PostLink" Type="nvarchar(max)" />
+          <Property Name="CategoryId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PostTagList">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TagId" Type="int" Nullable="false" />
+          <Property Name="PostId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TagList">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TagName" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="UserList">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KullaniciAdi" Type="nvarchar" MaxLength="500" />
+          <Property Name="Sifre" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <Association Name="FK_PostCommentList_PostList">
+          <End Role="PostList" Type="Self.PostList" Multiplicity="1" />
+          <End Role="PostCommentList" Type="Self.PostCommentList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PostList">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PostCommentList">
+              <PropertyRef Name="PostID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PostList_CategoryList">
+          <End Role="CategoryList" Type="Self.CategoryList" Multiplicity="1" />
+          <End Role="PostList" Type="Self.PostList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategoryList">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PostList">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PostTagList_PostList">
+          <End Role="PostList" Type="Self.PostList" Multiplicity="1" />
+          <End Role="PostTagList" Type="Self.PostTagList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PostList">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PostTagList">
+              <PropertyRef Name="PostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PostTagList_TagList">
+          <End Role="TagList" Type="Self.TagList" Multiplicity="1" />
+          <End Role="PostTagList" Type="Self.PostTagList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TagList">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PostTagList">
+              <PropertyRef Name="TagId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BlogModelStoreContainer">
+          <EntitySet Name="CategoryList" EntityType="Self.CategoryList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HeaderZone" EntityType="Self.HeaderZone" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MenuZone" EntityType="Self.MenuZone" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PostCommentList" EntityType="Self.PostCommentList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PostList" EntityType="Self.PostList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PostTagList" EntityType="Self.PostTagList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TagList" EntityType="Self.TagList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserList" EntityType="Self.UserList" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_PostCommentList_PostList" Association="Self.FK_PostCommentList_PostList">
+            <End Role="PostList" EntitySet="PostList" />
+            <End Role="PostCommentList" EntitySet="PostCommentList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PostList_CategoryList" Association="Self.FK_PostList_CategoryList">
+            <End Role="CategoryList" EntitySet="CategoryList" />
+            <End Role="PostList" EntitySet="PostList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PostTagList_PostList" Association="Self.FK_PostTagList_PostList">
+            <End Role="PostList" EntitySet="PostList" />
+            <End Role="PostTagList" EntitySet="PostTagList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PostTagList_TagList" Association="Self.FK_PostTagList_TagList">
+            <End Role="TagList" EntitySet="TagList" />
+            <End Role="PostTagList" EntitySet="PostTagList" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BlogModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="BlogEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CategoryList" EntityType="BlogModel.CategoryList" />
+          <EntitySet Name="HeaderZone" EntityType="BlogModel.HeaderZone" />
+          <EntitySet Name="MenuZone" EntityType="BlogModel.MenuZone" />
+          <EntitySet Name="PostCommentList" EntityType="BlogModel.PostCommentList" />
+          <EntitySet Name="PostList" EntityType="BlogModel.PostList" />
+          <EntitySet Name="PostTagList" EntityType="BlogModel.PostTagList" />
+          <EntitySet Name="TagList" EntityType="BlogModel.TagList" />
+          <EntitySet Name="UserList" EntityType="BlogModel.UserList" />
+          <AssociationSet Name="FK_PostList_CategoryList" Association="BlogModel.FK_PostList_CategoryList">
+            <End Role="CategoryList" EntitySet="CategoryList" />
+            <End Role="PostList" EntitySet="PostList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PostCommentList_PostList" Association="BlogModel.FK_PostCommentList_PostList">
+            <End Role="PostList" EntitySet="PostList" />
+            <End Role="PostCommentList" EntitySet="PostCommentList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PostTagList_PostList" Association="BlogModel.FK_PostTagList_PostList">
+            <End Role="PostList" EntitySet="PostList" />
+            <End Role="PostTagList" EntitySet="PostTagList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PostTagList_TagList" Association="BlogModel.FK_PostTagList_TagList">
+            <End Role="TagList" EntitySet="TagList" />
+            <End Role="PostTagList" EntitySet="PostTagList" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="CategoryList">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CategoryLink" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="TopCategory" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PostList" Relationship="BlogModel.FK_PostList_CategoryList" FromRole="CategoryList" ToRole="PostList" />
+        </EntityType>
+        <EntityType Name="HeaderZone">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Logo" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Slogan" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FooterText" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FacebookAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TwitterAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="GPlusAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="InstagramAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="MenuZone">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MenuName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="MenuLink" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="TopMenu" Type="Boolean" Nullable="false" />
+          <Property Name="RecordDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="PostCommentList">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Surname" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Comment" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="PostID" Type="Int32" Nullable="false" />
+          <Property Name="RecordDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="PostList" Relationship="BlogModel.FK_PostCommentList_PostList" FromRole="PostCommentList" ToRole="PostList" />
+        </EntityType>
+        <EntityType Name="PostList">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PostHeader" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+          <Property Name="PostDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PostBody" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PostLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CategoryList" Relationship="BlogModel.FK_PostList_CategoryList" FromRole="PostList" ToRole="CategoryList" />
+          <NavigationProperty Name="PostCommentList" Relationship="BlogModel.FK_PostCommentList_PostList" FromRole="PostList" ToRole="PostCommentList" />
+          <NavigationProperty Name="PostTagList" Relationship="BlogModel.FK_PostTagList_PostList" FromRole="PostList" ToRole="PostTagList" />
+        </EntityType>
+        <EntityType Name="PostTagList">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TagId" Type="Int32" Nullable="false" />
+          <Property Name="PostId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PostList" Relationship="BlogModel.FK_PostTagList_PostList" FromRole="PostTagList" ToRole="PostList" />
+          <NavigationProperty Name="TagList" Relationship="BlogModel.FK_PostTagList_TagList" FromRole="PostTagList" ToRole="TagList" />
+        </EntityType>
+        <EntityType Name="TagList">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TagName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PostTagList" Relationship="BlogModel.FK_PostTagList_TagList" FromRole="TagList" ToRole="PostTagList" />
+        </EntityType>
+        <EntityType Name="UserList">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KullaniciAdi" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Sifre" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_PostList_CategoryList">
+          <End Type="BlogModel.CategoryList" Role="CategoryList" Multiplicity="1" />
+          <End Type="BlogModel.PostList" Role="PostList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategoryList">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PostList">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PostCommentList_PostList">
+          <End Type="BlogModel.PostList" Role="PostList" Multiplicity="1" />
+          <End Type="BlogModel.PostCommentList" Role="PostCommentList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PostList">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PostCommentList">
+              <PropertyRef Name="PostID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PostTagList_PostList">
+          <End Type="BlogModel.PostList" Role="PostList" Multiplicity="1" />
+          <End Type="BlogModel.PostTagList" Role="PostTagList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PostList">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PostTagList">
+              <PropertyRef Name="PostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PostTagList_TagList">
+          <End Type="BlogModel.TagList" Role="TagList" Multiplicity="1" />
+          <End Type="BlogModel.PostTagList" Role="PostTagList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TagList">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PostTagList">
+              <PropertyRef Name="TagId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BlogModelStoreContainer" CdmEntityContainer="BlogEntities">
+          <EntitySetMapping Name="CategoryList">
+            <EntityTypeMapping TypeName="BlogModel.CategoryList">
+              <MappingFragment StoreEntitySet="CategoryList">
+                <ScalarProperty Name="TopCategory" ColumnName="TopCategory" />
+                <ScalarProperty Name="CategoryLink" ColumnName="CategoryLink" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HeaderZone">
+            <EntityTypeMapping TypeName="BlogModel.HeaderZone">
+              <MappingFragment StoreEntitySet="HeaderZone">
+                <ScalarProperty Name="InstagramAddress" ColumnName="InstagramAddress" />
+                <ScalarProperty Name="GPlusAddress" ColumnName="GPlusAddress" />
+                <ScalarProperty Name="TwitterAddress" ColumnName="TwitterAddress" />
+                <ScalarProperty Name="FacebookAddress" ColumnName="FacebookAddress" />
+                <ScalarProperty Name="FooterText" ColumnName="FooterText" />
+                <ScalarProperty Name="Slogan" ColumnName="Slogan" />
+                <ScalarProperty Name="Logo" ColumnName="Logo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MenuZone">
+            <EntityTypeMapping TypeName="BlogModel.MenuZone">
+              <MappingFragment StoreEntitySet="MenuZone">
+                <ScalarProperty Name="RecordDate" ColumnName="RecordDate" />
+                <ScalarProperty Name="TopMenu" ColumnName="TopMenu" />
+                <ScalarProperty Name="MenuLink" ColumnName="MenuLink" />
+                <ScalarProperty Name="MenuName" ColumnName="MenuName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PostCommentList">
+            <EntityTypeMapping TypeName="BlogModel.PostCommentList">
+              <MappingFragment StoreEntitySet="PostCommentList">
+                <ScalarProperty Name="RecordDate" ColumnName="RecordDate" />
+                <ScalarProperty Name="PostID" ColumnName="PostID" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PostList">
+            <EntityTypeMapping TypeName="BlogModel.PostList">
+              <MappingFragment StoreEntitySet="PostList">
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="PostLink" ColumnName="PostLink" />
+                <ScalarProperty Name="PostBody" ColumnName="PostBody" />
+                <ScalarProperty Name="PostDate" ColumnName="PostDate" />
+                <ScalarProperty Name="PostHeader" ColumnName="PostHeader" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PostTagList">
+            <EntityTypeMapping TypeName="BlogModel.PostTagList">
+              <MappingFragment StoreEntitySet="PostTagList">
+                <ScalarProperty Name="PostId" ColumnName="PostId" />
+                <ScalarProperty Name="TagId" ColumnName="TagId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TagList">
+            <EntityTypeMapping TypeName="BlogModel.TagList">
+              <MappingFragment StoreEntitySet="TagList">
+                <ScalarProperty Name="TagName" ColumnName="TagName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserList">
+            <EntityTypeMapping TypeName="BlogModel.UserList">
+              <MappingFragment StoreEntitySet="UserList">
+                <ScalarProperty Name="Sifre" ColumnName="Sifre" />
+                <ScalarProperty Name="KullaniciAdi" ColumnName="KullaniciAdi" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

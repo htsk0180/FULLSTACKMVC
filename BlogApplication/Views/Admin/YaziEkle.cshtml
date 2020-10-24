@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "YaziEkle";
+    Layout = "~/Views/Shared/_LayoutAdminPage.cshtml";
+}
+
+<form action="/Admin/YaziAdd" method="post">
+    <table>
+        <tr>
+            <td>Yazı Başlık</td>
+            <td><input type="text" name="PostHeader" /></td>
+        </tr>
+        <tr>
+            <td>Yazı Detayı</td>
+            <td><textarea name="PostBody"></textarea></td>
+        </tr>
+        <tr>
+            <td>Yazı Link</td>
+            <td><input type="text" name="PostLink" /></td>
+        </tr>
+        <tr>
+            <td>Kategori</td>
+            <td>
+                <select name="TopCategory">
+                    <option value="0">Ana Kategori</option>
+                    @foreach (var item in ViewBag.categorylist)
+                    {
+                        <option value="@item.Id">@item.CategoryName</option>
+                    }
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Yazıyı Ekle" /></td>
+        </tr>
+    </table>
+
+</form>
